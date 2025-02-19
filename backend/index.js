@@ -142,7 +142,7 @@ app.get("/get-user", authenticateToken,async (req,res)=>{
 
 app.post("/add-note", authenticateToken, async (req, res) => {
   const { title, content, tags } = req.body;
-  const {user} = req.user;  // ✅ Corrected this
+  const {user} = req.user;  
 
   if (!title) {
     return res.status(400).json({ error: true, message: "Title is required" });
@@ -157,7 +157,7 @@ app.post("/add-note", authenticateToken, async (req, res) => {
       title,
       content,
       tags: tags || [],
-      userId: user._id,  // ✅ Corrected user access
+      userId: user._id,  
     });
 
     await note.save();
@@ -178,7 +178,7 @@ app.post("/add-note", authenticateToken, async (req, res) => {
 app.put("/edit-note/:noteId",authenticateToken,async (req ,res)=>{
     const { title, content, tags,isPinned } = req.body;
     const noteId=req.params.noteId;
-    const {user} = req.user;  // ✅ Corrected this
+    const {user} = req.user;  
   
     if (!title && !content && !tags) {
       return res.status(400).json({ error: true, message: "No changes provided" });
